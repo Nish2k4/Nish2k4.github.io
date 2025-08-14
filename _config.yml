@@ -8,7 +8,7 @@ plugins:
   - jekyll-include-cache
 
 # Skin options: default, air, contrast, dark, dirt, mint, neon, sunrise
-minimal_mistakes_skin: "air"
+minimal_mistakes_skin: "sunrise"
 
 # Author profile
 author:
