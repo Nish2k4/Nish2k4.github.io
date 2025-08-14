@@ -10,3 +10,44 @@ body {
   a:hover {
     color: #E6CCE6; /* Softer purple hover */
   }
+
+
+  /* Base */
+html, body { background: #580F41; color: #F5F5F5; }
+a { color: #D8BFD8; }
+a:hover, a:focus { color: #E6CCE6; }
+
+/* Header / nav */
+.masthead, .greedy-nav {
+  background: transparent;        /* let plum show through */
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.greedy-nav a, .masthead__menu-item a {
+  color: #F5F5F5 !important;
+}
+.greedy-nav a:hover, .masthead__menu-item a:hover {
+  color: #E6CCE6 !important;
+}
+
+/* Buttons */
+.btn, .btn--primary, .btn--inverse {
+  background: #D8BFD8;   /* lavender */
+  color: #3B1430;        /* deep plum text */
+  border: none;
+}
+.btn:hover { filter: brightness(1.06); }
+
+/* Cards/sections */
+.page, .page__inner-wrap, .archive, .archive__item, .sidebar {
+  background: rgba(0,0,0,0.08);   /* subtle overlay for readability */
+  backdrop-filter: blur(2px);
+}
+
+/* Code blocks / callouts readability */
+.highlighter-rouge, pre, code {
+  background: rgba(255,255,255,0.08);
+  color: #FFF;
+}
+
+/* Footer */
+.page__footer { background: transparent; border-top: 1px solid rgba(255,255,255,0.12); }
