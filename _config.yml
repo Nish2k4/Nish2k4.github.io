@@ -1,0 +1,54 @@
+title: "Nishthha Pandya"
+subtitle: "CS (People & Media) @ Georgia Tech"
+description: "Human-centered software, mobile, and visual design."
+url: "https://nish2k4.github.io"
+baseurl: ""
+remote_theme: "mmistakes/minimal-mistakes"
+plugins:
+  - jekyll-include-cache
+
+# Skin options: default, air, contrast, dark, dirt, mint, neon, sunrise
+minimal_mistakes_skin: "air"
+
+# Author profile
+author:
+  name: "Nishthha Pandya"
+  avatar: "/assets/img/avatar.png"
+  bio: "Third-year CS @ Georgia Tech — building useful & delightful experiences."
+  location: "Atlanta, GA"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/nish2k4"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/nishthha-pandya-60a8191b1/"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:nishthhapandya@gmail.com"
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: single
+      author_profile: false
+      share: false
+      sidebar: false
+
+# SEO & Analytics
+google_analytics: ""  # Add your GA ID if you have one
+
+# Navigation
+# Configured via _data/navigation.yml
+
+paginate: 5
+paginate_path: /blog/page:num/
