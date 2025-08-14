@@ -1,0 +1,12 @@
+body {
+    background-color: #580F41; /* Deep Plum */
+    color: #F5F5F5; /* Light text */
+  }
+  
+  a {
+    color: #D8BFD8; /* Light purple links */
+  }
+  
+  a:hover {
+    color: #E6CCE6; /* Softer purple hover */
+  }
