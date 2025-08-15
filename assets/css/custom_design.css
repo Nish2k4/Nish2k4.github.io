@@ -1,189 +1,168 @@
-/* =============================
-   Boho Theme – Nishthha
-   Palette:
-     blush-rose:   #e5af9e
-     terracotta:   #a3573a
-     sand-gold:    #df9152
-     warm-rose:    #eaa198
-     cream:        #fff4f1
-     espresso:     #3b2a28  (for readable text)
-   ============================= */
+/* =========================================
+   Nishthha – Ocean · Teal · Gold Theme
+   (Minimal Mistakes friendly)
+   ========================================= */
 
-/* 0) Fonts & Vars */
-:root {
+/* Fonts + core variables */
+:root{
   --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
   --font-body:    Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  /* Colors */
-  --boho-cream:      #fff4f1;
-  --boho-blush:      #e5af9e;
-  --boho-rose:       #eaa198;
-  --boho-terra:      #a3573a;
-  --boho-gold:       #df9152;
-  --boho-espresso:   #3b2a28;
+  /* Palette (your picks) */
+  --navy:   #0c2739;  /* dark navy blue  */
+  --dteal:  #285f7d;  /* deep teal blue  */
+  --teal:   #4ca8b6;  /* vibrant teal    */
+  --gold:   #eeb63e;  /* bright golden   */
+  --orange: #bb7529;  /* burnt orange    */
 
-  /* Radii & shadows (soft/organic) */
+  /* UI helpers */
+  --text:  #0c2739;                 /* readable text on panels */
+  --panel: rgba(255,255,255,0.78);  /* content card background */
   --radius: 14px;
-  --shadow: 0 6px 20px rgba(163, 87, 58, 0.12);
+  --shadow: 0 10px 30px rgba(12,39,57,.15);
 }
 
-/* 1) Base */
-html, body {
-  color: var(--boho-espresso);
+/* ========================
+   Typography & links
+   ======================== */
+html, body{
+  color: var(--text);
   font-family: var(--font-body);
+  font-feature-settings: "liga" 1, "calt" 1;
 }
-h1,h2,h3,h4 {
+h1,h2,h3,h4{
   font-family: var(--font-display);
-  color: var(--boho-espresso);
+  color: var(--text);
   letter-spacing: .2px;
 }
+a{ color: var(--teal); text-decoration-thickness: .08em; }
+a:hover, a:focus{ color: var(--gold); }
 
-/* Links */
-a { color: var(--boho-terra); text-decoration-thickness: .08em; }
-a:hover, a:focus { color: var(--boho-gold); }
-
-/* 2) Header / navigation */
+/* ========================
+   Masthead / navigation
+   ======================== */
 .masthead,
 .masthead__inner-wrap,
-.greedy-nav {
-  background: var(--boho-terra) !important;
-  border-bottom: 1px solid rgba(0,0,0,.05);
+.greedy-nav{
+  background: linear-gradient(180deg, rgba(12,39,57,.88), rgba(12,39,57,.66));
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
-.masthead a,
 .greedy-nav .visible-links > li > a,
-.masthead__menu-item a {
-  color: var(--boho-cream) !important;
+.masthead__menu-item a{
+  color: #e9f3f8 !important;
   background: transparent !important;
 }
 .greedy-nav .visible-links > li > a:hover,
-.masthead__menu-item a:hover {
-  color: var(--boho-gold) !important;
-  background: rgba(255,255,255,.06) !important;
-  border-radius: 8px;
-}
-
-/* Active nav item underline */
-.greedy-nav .visible-links > li > a[aria-current="page"] {
-  color: var(--boho-gold) !important;
-  box-shadow: inset 0 -2px 0 var(--boho-gold);
+.masthead__menu-item a:hover{
+  color: var(--gold) !important;
+  box-shadow: inset 0 -2px 0 var(--gold);
   border-radius: 0;
 }
-
-/* 3) Buttons */
-.btn, .btn--primary, .btn--inverse {
-  background: var(--boho-terra);
-  color: var(--boho-cream);
-  border: none;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-.btn:hover { background: var(--boho-gold); }
-
-/* 4) Cards/sections */
-.page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout {
-  background: rgba(255, 244, 241, 0.65) !important; /* translucent so background shows */
-  border: 1px solid rgba(163,87,58,.12);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+/* Current tab */
+.greedy-nav .visible-links > li > a[aria-current="page"]{
+  color: var(--gold) !important;
+  box-shadow: inset 0 -2px 0 var(--gold);
 }
 
-/* 5) Hero section */
-.page__hero, .page__hero--overlay {
+/* ========================
+   Content cards / sections
+   ======================== */
+.page,
+.page__inner-wrap,
+.archive,
+.archive__item,
+.sidebar,
+.notice,
+.callout{
+  background: var(--panel) !important;
+  border: 1px solid rgba(12,39,57,.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1; /* keep above shimmer */
+}
+
+/* Hero box keeps black overlay, just soften edges */
+.page__hero, .page__hero--overlay{
   border-radius: var(--radius);
   overflow: hidden;
 }
 
-/* 6) Footer */
-.page__footer {
-  background: var(--boho-terra);
-  color: var(--boho-cream);
-  border-top: 1px solid rgba(0,0,0,.05);
+/* ========================
+   Buttons
+   ======================== */
+.btn, .btn--primary, .btn--inverse{
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+.btn:hover{ background: var(--dteal); }
+.btn--inverse{ background: var(--gold); color: var(--navy); }
+.btn--inverse:hover{ background: var(--orange); }
+
+/* ========================
+   Divider & tags (optional)
+   ======================== */
+.boho-divider{
+  height: 8px; max-width: 900px; margin: 2rem auto;
+  background: linear-gradient(90deg, var(--teal), var(--dteal), var(--gold));
+  border-radius: 999px; opacity: .45;
+}
+.tag, .btn--tag{
+  display:inline-block; padding:.25rem .6rem; margin:.15rem;
+  border-radius:999px; background: rgba(76,168,182,.18);
+  color: var(--text); box-shadow: 0 2px 8px rgba(12,39,57,.12); font-weight:600;
 }
 
-/* 7) Code blocks */
-.highlighter-rouge, pre, code {
-  background: rgba(0,0,0,0.06);
-  color: var(--boho-espresso);
-  border-radius: 10px;
+/* Mobile hero text tweak */
+@media (max-width:640px){
+  .page__hero--overlay h1{ font-size:2rem; line-height:1.2; }
 }
 
-/* 8) Boho divider */
-.boho-divider {
-  height: 8px;
-  max-width: 900px;
-  margin: 2rem auto;
-  background: linear-gradient(90deg,
-    var(--boho-rose), var(--boho-blush), var(--boho-gold), var(--boho-terra));
-  border-radius: 999px;
-  opacity: .45;
+/* =========================================
+   Ocean Watercolor background + cursor shimmer
+   ========================================= */
+/* drifting teal/blue pools under everything */
+body{
+  background:
+    radial-gradient(circle at 25% 20%, rgba(76,168,182,.55) 0%, transparent 55%),
+    radial-gradient(circle at 75% 25%, rgba(40,95,125,.50) 0%, transparent 60%),
+    radial-gradient(circle at 45% 80%, rgba(12,39,57,.60) 0%, transparent 55%),
+    var(--navy);
+  background-blend-mode: screen;
+  background-size: 220% 220%;
+  background-attachment: fixed;
+  animation: oceanMove 28s ease-in-out infinite alternate;
+  position: relative; /* stacking context for shimmer */
+}
+/* slow drift */
+@keyframes oceanMove{
+  0%   { background-position:   0%   0%; }
+  50%  { background-position:  50%  55%; }
+  100% { background-position: 100% 100%; }
 }
 
-/* 9) Tags / chips */
-.tag, .btn--tag {
-  display: inline-block;
-  padding: .25rem .6rem;
-  margin: .15rem;
-  border-radius: 999px;
-  background: var(--boho-rose);
-  color: var(--boho-espresso);
-  box-shadow: 0 2px 8px rgba(163,87,58,.12);
-  font-weight: 600;
+/* gold/orange burst that follows cursor (sits between bg and content) */
+body::before{
+  content:"";
+  position: fixed; inset: 0;
+  pointer-events:none; z-index:0; opacity:0;
+  transition: opacity .25s ease;
+  background:
+    radial-gradient(circle at var(--mouse-x,50%) var(--mouse-y,50%),
+      rgba(238,182,62,.38) 0%,
+      rgba(187,117,41,.28) 14%,
+      transparent 38%);
 }
 
-/* 10) Mobile hero text */
-@media (max-width: 640px) {
-  .page__hero--overlay h1 { font-size: 2rem; line-height: 1.2; }
-}
+/* toggled by JS when mouse moves */
+body.gold-active::before{ opacity:1; }
 
-/* =============================
-   Ocean-Gold Watercolor Background
-   ============================= */
-   :root {
-    --blue-dark:  #0c2739;
-    --blue-teal:  #285f7d;
-    --teal:       #4ca8b6;
-    --gold:       #eeb63e;
-    --orange:     #bb7529;
-  }
-  
-  body {
-    background:
-      radial-gradient(circle at 25% 20%, var(--teal) 0%, transparent 50%),
-      radial-gradient(circle at 75% 25%, var(--blue-teal) 0%, transparent 55%),
-      radial-gradient(circle at 40% 80%, var(--blue-dark) 0%, transparent 50%),
-      var(--blue-dark);
-    background-blend-mode: screen;
-    background-size: 200% 200%;
-    background-attachment: fixed;
-    animation: oceanMove 30s ease-in-out infinite alternate;
-    transition: background 0.3s ease;
-    position: relative;
-    overflow-x: hidden;
-    color: white;
-  }
-  
-  /* Movement animation */
-  @keyframes oceanMove {
-    0%   { background-position:   0%   0%; }
-    50%  { background-position:  50%  50%; }
-    100% { background-position: 100% 100%; }
-  }
-  
-  /* Shimmer burst layer – appears on mousemove */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(238,182,62,0.5) 0%, rgba(187,117,41,0.4) 15%, transparent 40%);
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  
-  /* JS will control this */
-  body.gold-active::before {
-    opacity: 1;
-  }
+/* respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  body{ animation:none; }
+  body::before{ display:none; }
+}
