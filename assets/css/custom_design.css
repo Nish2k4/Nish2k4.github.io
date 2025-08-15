@@ -166,3 +166,12 @@ body.gold-active::before{ opacity:1; }
   body{ animation:none; }
   body::before{ display:none; }
 }
+
+/* Sparkle trail canvas */
+#sparkle-canvas{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;                 /* content cards are z-index: 1, so they stay above */
+  mix-blend-mode: screen;     /* makes light colors pop nicely on dark bg */
+}

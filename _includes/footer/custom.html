@@ -1,16 +1,104 @@
 <script>
-    (function(){
+    (function () {
+      /* ------------------------------
+         Gold shimmer (kept as before)
+      -------------------------------*/
       var t;
-      document.addEventListener('mousemove', function(e){
-        var x = (e.clientX / innerWidth)  * 100 + '%';
+      document.addEventListener('mousemove', function (e) {
+        var x = (e.clientX / innerWidth) * 100 + '%';
         var y = (e.clientY / innerHeight) * 100 + '%';
         document.body.style.setProperty('--mouse-x', x);
         document.body.style.setProperty('--mouse-y', y);
         document.body.classList.add('gold-active');
         clearTimeout(t);
-        t = setTimeout(function(){
-          document.body.classList.remove('gold-active');
-        }, 180);
+        t = setTimeout(function(){ document.body.classList.remove('gold-active'); }, 180);
       }, { passive: true });
+  
+      /* ------------------------------
+         Sparkly cursor trail (canvas)
+      -------------------------------*/
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  
+      // Create canvas layer
+      var canvas = document.getElementById('sparkle-canvas');
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'sparkle-canvas';
+        document.body.appendChild(canvas);
+      }
+      var ctx = canvas.getContext('2d');
+      var dpr = Math.max(1, window.devicePixelRatio || 1);
+      var W, H;
+  
+      function resize() {
+        W = canvas.width  = Math.floor(innerWidth  * dpr);
+        H = canvas.height = Math.floor(innerHeight * dpr);
+        canvas.style.width  = innerWidth  + 'px';
+        canvas.style.height = innerHeight + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.globalCompositeOperation = 'lighter'; // pretty sparkly blending
+      }
+      addEventListener('resize', resize, { passive: true });
+      resize();
+  
+      // Particle system
+      var particles = [];
+      var colors = ['#eeb63e', '#bb7529', '#ffffff', '#4ca8b6']; // gold, orange, white, teal
+      var lastX = innerWidth / 2, lastY = innerHeight / 2;
+  
+      function spawn(x, y) {
+        // spawn a few on each mouse move
+        for (var i = 0; i < 10; i++) {
+          var angle = Math.random() * Math.PI * 2;
+          var speed = 0.6 + Math.random() * 1.2;
+          particles.push({
+            x: x, y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: 1,                   // fades from 1 -> 0
+            decay: 0.02 + Math.random() * 0.04,
+            size: 1.8 + Math.random() * 2.2,
+            color: colors[(Math.random() * colors.length) | 0]
+          });
+        }
+      }
+  
+      document.addEventListener('mousemove', function (e) {
+        lastX = e.clientX; lastY = e.clientY;
+        spawn(lastX, lastY);
+      }, { passive: true });
+  
+      // Gentle spawning when mouse is still (so it feels alive)
+      var idleTimer;
+      function nudgeIdle() {
+        spawn(lastX, lastY);
+        idleTimer = setTimeout(nudgeIdle, 120);
+      }
+      idleTimer = setTimeout(nudgeIdle, 120);
+  
+      // Animation loop
+      function tick() {
+        // subtle motion blur clear
+        ctx.fillStyle = 'rgba(12, 39, 57, 0.08)';  // matches your navy
+        ctx.fillRect(0, 0, innerWidth, innerHeight);
+  
+        for (var i = particles.length - 1; i >= 0; i--) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.02;         // tiny gravity so it feels floaty
+          p.life -= p.decay;
+  
+          if (p.life <= 0) { particles.splice(i, 1); continue; }
+  
+          ctx.globalAlpha = Math.max(p.life, 0);
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
     })();
   </script>
