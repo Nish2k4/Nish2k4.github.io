@@ -175,3 +175,26 @@ body.gold-active::before{ opacity:1; }
   z-index: 0;                 /* content cards are z-index: 1, so they stay above */
   mix-blend-mode: screen;     /* makes light colors pop nicely on dark bg */
 }
+
+
+/* Mini-gallery photography adjustments */
+.mini-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.mini-gallery img {
+  width: 100%;
+  height: 180px; /* keep consistent height */
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mini-gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
