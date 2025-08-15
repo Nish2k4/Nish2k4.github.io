@@ -148,3 +148,13 @@ a:hover, a:focus { color: var(--boho-gold); }
   border-radius: 999px;
   opacity: .45;
 }
+
+/* To create a unique background. */
+body {
+  background-image:
+    radial-gradient(rgba(0,0,0,.015) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,.02) 1px, transparent 1px);
+  background-size: 24px 24px, 12px 12px;
+  background-position: 0 0, 12px 6px;
+}
+
