@@ -136,7 +136,7 @@ a:hover, a:focus { color: var(--boho-gold); }
 }
 
 /* =============================
-   Boho Cloudy Watercolor Wash (Enhanced)
+   Boho Cloudy Watercolor Wash – Animated
    ============================= */
    body {
     background:
@@ -146,7 +146,8 @@ a:hover, a:focus { color: var(--boho-gold); }
       var(--boho-cream);
     background-blend-mode: multiply;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 200% 200%; /* larger so movement is smoother */
+    animation: bohoMove 60s ease-in-out infinite alternate;
     color: var(--boho-espresso);
   }
   
@@ -156,4 +157,17 @@ a:hover, a:focus { color: var(--boho-gold); }
     border: 1px solid rgba(163,87,58,.12);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+  }
+  
+  /* Animation Keyframes */
+  @keyframes bohoMove {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 50% 50%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
   }
