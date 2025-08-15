@@ -150,23 +150,19 @@ a:hover, a:focus { color: var(--boho-gold); }
   opacity: .45;
 }
 
-/* ===== To create an animated background ===== */
+/* ===== To create a background ===== */
 
-/* Boho shimmer background */
-body {
-  background: linear-gradient(
-    120deg,
-    var(--boho-cream) 0%,
-    var(--boho-cream) 40%,
-    rgba(255, 255, 255, 0.4) 50%,
-    var(--boho-blush) 60%,
-    var(--boho-cream) 100%
-  ) !important;
-  background-size: 200% 200% !important;
-  animation: shimmerMove 6s ease-in-out infinite;
-}
-
-@keyframes shimmerMove {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
+/* =============================
+   Boho Cloudy Watercolor Wash
+   ============================= */
+   body {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(229,175,158,0.35) 0%, transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(223,145,82,0.25) 0%, transparent 45%),
+      radial-gradient(circle at 50% 80%, rgba(234,161,152,0.3) 0%, transparent 40%),
+      var(--boho-cream);
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+    background-size: cover;
+    color: var(--boho-espresso);
+  }
