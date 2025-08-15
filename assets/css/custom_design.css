@@ -135,64 +135,25 @@ a:hover, a:focus { color: var(--boho-gold); }
   .page__hero--overlay h1 { font-size: 2rem; line-height: 1.2; }
 }
 
-/* =========================================
-   Reliable Boho Hexagon Grid Background
-   ========================================= */
-   :root{
-    /* Hex size (try 60–100px) */
-    --hex: 84px;
-    /* Grid line color (terracotta, soft) */
-    --hex-line: rgba(163,87,58,0.16); /* from your --boho-terra */
-  }
-  
-  /* Base + hex grid */
-  body{
-    /* Helper values */
-    --h: var(--hex);
-    --a: calc(var(--h) * 0.57735); /* √3/3 ~ 0.57735 — hex vertical step */
-  
+/* =============================
+   Boho Cloudy Watercolor Wash (Enhanced)
+   ============================= */
+   body {
     background:
-      /* vertex dots to complete the honeycomb illusion */
-      radial-gradient(circle at 50% 0, var(--hex-line) 2px, transparent 2.2px)
-        calc(var(--h) / 2) calc(var(--a) * 0.5) / var(--h) var(--h),
-      radial-gradient(circle at 0 0, var(--hex-line) 2px, transparent 2.2px)
-        0                 var(--a) / var(--h) var(--h),
-  
-      /* three line families that form hex cells */
-      linear-gradient(var(--hex-line) 2px, transparent 0)
-        0 0 / var(--h) var(--a),        /* horizontal step */
-      linear-gradient(60deg, var(--hex-line) 2px, transparent 0)
-        0 0 / var(--h) var(--h),        /* +60° */
-      linear-gradient(-60deg, var(--hex-line) 2px, transparent 0)
-        0 0 / var(--h) var(--h),        /* -60° */
-  
-      /* warm paper base */
-      var(--boho-cream) !important;
-  
-    background-repeat: repeat;
-    background-attachment: fixed; /* keeps grid steady while scrolling */
+      radial-gradient(circle at 25% 20%, rgba(229,175,158,0.55) 0%, transparent 50%), /* blush-rose */
+      radial-gradient(circle at 75% 25%, rgba(223,145,82,0.45) 0%, transparent 55%),  /* sand-gold */
+      radial-gradient(circle at 40% 80%, rgba(234,161,152,0.5) 0%, transparent 50%),  /* warm-rose */
+      var(--boho-cream);
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+    background-size: cover;
     color: var(--boho-espresso);
   }
   
-  /* Make content blocks a bit translucent so the grid peeks through */
-  .page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout{
-    background: rgba(255,244,241,0.68) !important;
+  /* Keep content panels translucent so background shows */
+  .page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout {
+    background: rgba(255, 244, 241, 0.7) !important;
     border: 1px solid rgba(163,87,58,.12);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
   }
-  
-  /* Optional: very subtle drift for a “living” feel */
-  @keyframes hexDrift {
-    0%   { background-position:
-             calc(var(--h)/2) calc(var(--a)*0.5),
-             0                var(--a),
-             0 0, 0 0, 0 0,
-             0 0; }
-    100% { background-position:
-             calc(var(--h)/2 + 6px) calc(var(--a)*0.5 + 4px),
-             6px                    calc(var(--a) + 4px),
-             6px 4px, 6px 4px, 6px 4px,
-             0 0; }
-  }
-  body{ animation: hexDrift 40s ease-in-out infinite alternate; }
