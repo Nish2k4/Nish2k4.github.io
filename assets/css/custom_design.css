@@ -135,15 +135,64 @@ a:hover, a:focus { color: var(--boho-gold); }
   .page__hero--overlay h1 { font-size: 2rem; line-height: 1.2; }
 }
 
-/* ====== Boho Cloudy Watercolor Wash Background ====== */
+/* =========================================
+   Boho Hexagon Grid Background (soft + techy)
+   – drop this at the VERY BOTTOM of custom_design.css
+   – removes previous background styles
+   ========================================= */
+
+/* Tuning knobs */
+:root {
+  /* Size of each hex cell (try 60–96px) */
+  --hex-s: 80px;
+
+  /* Line color for the grid (terracotta with low alpha) */
+  --hex-line: rgba(163, 87, 58, 0.16);  /* from var(--boho-terra) */
+}
+
+/* Hex grid over warm cream base */
 body {
   background:
-    radial-gradient(circle at 20% 20%, rgba(229,175,158,0.35) 0%, transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(223,145,82,0.25) 0%, transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(234,161,152,0.30) 0%, transparent 40%),
+    /* top vertex dots to complete hex illusion */
+    radial-gradient(circle at 50% 0, var(--hex-line) 1.5px, transparent 1.6px)
+      calc(var(--hex-s)/2) calc(var(--hex-s)*0.288675) / var(--hex-s) var(--hex-s),
+    radial-gradient(circle at 0 0, var(--hex-line) 1.5px, transparent 1.6px)
+      0 calc(var(--hex-s)*0.57735) / var(--hex-s) var(--hex-s),
+
+    /* three directions of lines that form hex cells */
+    linear-gradient(var(--hex-line) 1px, transparent 0)
+      0 0 / var(--hex-s) calc(var(--hex-s)*0.57735),
+    linear-gradient(60deg, var(--hex-line) 1px, transparent 0)
+      0 0 / var(--hex-s) var(--hex-s),
+    linear-gradient(-60deg, var(--hex-line) 1px, transparent 0)
+      0 0 / var(--hex-s) var(--hex-s),
+
+    /* warm cream base from your palette */
     var(--boho-cream) !important;
-  background-blend-mode: multiply;
+
   background-attachment: fixed;
-  background-size: cover !important;
+  background-blend-mode: normal;
   color: var(--boho-espresso);
 }
+
+/* Let content areas be translucent so the hexes peek through */
+.page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout {
+  background: rgba(255, 244, 241, 0.68) !important; /* creamy + translucent */
+  border: 1px solid rgba(163,87,58,.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Optional: ultra-subtle drift animation for a living feel.
+   Comment out this section if you prefer static. */
+@keyframes hexDrift {
+  0%   { background-position:
+           calc(var(--hex-s)/2) calc(var(--hex-s)*0.288675),
+           0                    calc(var(--hex-s)*0.57735),
+           0 0, 0 0, 0 0; }
+  100% { background-position:
+           calc(var(--hex-s)/2 + 6px) calc(var(--hex-s)*0.288675 + 4px),
+           6px                         calc(var(--hex-s)*0.57735 + 4px),
+           6px 4px, 6px 4px, 6px 4px; }
+}
+body { animation: hexDrift 40s ease-in-out infinite alternate; }
