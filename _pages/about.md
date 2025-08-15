@@ -16,12 +16,12 @@ Hi! I'm **Nishthha**, a third-year **CS (People & Media) @ Georgia Tech**, focus
 
 <div class="mini-gallery">
   <figure class="archive__item">
-    <img src="{{ '/assets/images/photo_ansley_park_clock.jpg' | relative_url }}" alt="Ansley clock at blue hour">
+    <img src="https://nish2k4.github.io/assets/images/photo_ansley_park_clock.jpg" alt="Ansley clock at blue hour">
   </figure>
   <figure class="archive__item">
-    <img src="{{ '/assets/images/photo_rose_phone_booth.jpg' | relative_url }}" alt="Vintage phone on red floral wall">
+    <img src="https://nish2k4.github.io/assets/images/photo_rose_phone_booth.jpg" alt="Vintage phone on red floral wall">
   </figure>
   <figure class="archive__item">
-    <img src="{{ '/assets/images/photo_georgia_tech_beauty.jpg' | relative_url }}" alt="Intricate new structure at Georgia Tech">
+    <img src="https://nish2k4.github.io/assets/images/photo_georgia_tech_beauty.jpg" alt="Intricate new structure at Georgia Tech">
   </figure>
 </div>
