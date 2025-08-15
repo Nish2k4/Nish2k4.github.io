@@ -1,104 +1,101 @@
 <script>
     (function () {
-      /* ------------------------------
-         Gold shimmer (kept as before)
-      -------------------------------*/
-      var t;
-      document.addEventListener('mousemove', function (e) {
-        var x = (e.clientX / innerWidth) * 100 + '%';
-        var y = (e.clientY / innerHeight) * 100 + '%';
-        document.body.style.setProperty('--mouse-x', x);
-        document.body.style.setProperty('--mouse-y', y);
-        document.body.classList.add('gold-active');
-        clearTimeout(t);
-        t = setTimeout(function(){ document.body.classList.remove('gold-active'); }, 180);
-      }, { passive: true });
-  
-      /* ------------------------------
-         Sparkly cursor trail (canvas)
-      -------------------------------*/
+      // Respect "Reduce Motion"
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  
-      // Create canvas layer
+    
+      // --- Create or reuse the canvas layer
       var canvas = document.getElementById('sparkle-canvas');
       if (!canvas) {
         canvas = document.createElement('canvas');
         canvas.id = 'sparkle-canvas';
         document.body.appendChild(canvas);
       }
-      var ctx = canvas.getContext('2d');
+      var ctx = canvas.getContext('2d', { alpha: true });
+    
       var dpr = Math.max(1, window.devicePixelRatio || 1);
       var W, H;
-  
+    
       function resize() {
-        W = canvas.width  = Math.floor(innerWidth  * dpr);
-        H = canvas.height = Math.floor(innerHeight * dpr);
-        canvas.style.width  = innerWidth  + 'px';
-        canvas.style.height = innerHeight + 'px';
+        W = canvas.width  = Math.floor(window.innerWidth  * dpr);
+        H = canvas.height = Math.floor(window.innerHeight * dpr);
+        canvas.style.width  = window.innerWidth  + 'px';
+        canvas.style.height = window.innerHeight + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ctx.globalCompositeOperation = 'lighter'; // pretty sparkly blending
+        ctx.globalCompositeOperation = 'lighter'; // soft glow, we'll keep alpha tiny
       }
-      addEventListener('resize', resize, { passive: true });
+      window.addEventListener('resize', resize, { passive: true });
       resize();
-  
-      // Particle system
+    
+      // --- Subtle particle system (quiet + short-lived)
       var particles = [];
-      var colors = ['#eeb63e', '#bb7529', '#ffffff', '#4ca8b6']; // gold, orange, white, teal
-      var lastX = innerWidth / 2, lastY = innerHeight / 2;
-  
+      var MAX_PARTICLES = 180; // hard cap so it never gets noisy
+    
+      // Gold/orange tones only
+      var colors = ['#eeb63e', '#bb7529'];
+    
+      // Convert hex to [r,g,b] for easy alpha fills
+      function hexToRgb(hex){
+        hex = hex.replace('#','');
+        if (hex.length===3) hex = hex.split('').map(c=>c+c).join('');
+        var num = parseInt(hex,16);
+        return [(num>>16)&255, (num>>8)&255, num&255];
+      }
+      var rgb = colors.map(hexToRgb);
+    
       function spawn(x, y) {
-        // spawn a few on each mouse move
-        for (var i = 0; i < 10; i++) {
+        // just a couple per move
+        for (var i = 0; i < 3; i++) {
+          // tiny gentle motion
           var angle = Math.random() * Math.PI * 2;
-          var speed = 0.6 + Math.random() * 1.2;
+          var speed = 0.25 + Math.random() * 0.35; // slow
           particles.push({
             x: x, y: y,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed,
-            life: 1,                   // fades from 1 -> 0
-            decay: 0.02 + Math.random() * 0.04,
-            size: 1.8 + Math.random() * 2.2,
-            color: colors[(Math.random() * colors.length) | 0]
+            size: 0.9 + Math.random() * 1.3,   // very small dots (≈ 1–2 px)
+            life: 1,                            // start full, fade to 0
+            decay: 0.06 + Math.random() * 0.06, // ~1–1.7s lifetime
+            colorIdx: (Math.random() < 0.65 ? 0 : 1), // mostly gold with a few orange
+            baseAlpha: 0.28 + Math.random() * 0.15   // subtle brightness
           });
         }
+    
+        // keep things bounded
+        if (particles.length > MAX_PARTICLES) {
+          particles.splice(0, particles.length - MAX_PARTICLES);
+        }
       }
-  
+    
+      // Drive spawning with mouse movement only (no idle emissions)
+      var lastX = window.innerWidth / 2, lastY = window.innerHeight / 2;
       document.addEventListener('mousemove', function (e) {
         lastX = e.clientX; lastY = e.clientY;
         spawn(lastX, lastY);
       }, { passive: true });
-  
-      // Gentle spawning when mouse is still (so it feels alive)
-      var idleTimer;
-      function nudgeIdle() {
-        spawn(lastX, lastY);
-        idleTimer = setTimeout(nudgeIdle, 120);
-      }
-      idleTimer = setTimeout(nudgeIdle, 120);
-  
-      // Animation loop
+    
+      // --- Animation loop
       function tick() {
-        // subtle motion blur clear
-        ctx.fillStyle = 'rgba(12, 39, 57, 0.08)';  // matches your navy
-        ctx.fillRect(0, 0, innerWidth, innerHeight);
-  
+        // clear fully (no heavy bloom/exposure)
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    
         for (var i = particles.length - 1; i >= 0; i--) {
           var p = particles[i];
           p.x += p.vx;
           p.y += p.vy;
-          p.vy += 0.02;         // tiny gravity so it feels floaty
           p.life -= p.decay;
-  
+    
           if (p.life <= 0) { particles.splice(i, 1); continue; }
-  
-          ctx.globalAlpha = Math.max(p.life, 0);
-          ctx.fillStyle = p.color;
+    
+          var c = rgb[p.colorIdx];
+          ctx.globalAlpha = Math.max(0, p.baseAlpha * p.life); // fades quickly
+          ctx.fillStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',1)';
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
           ctx.fill();
         }
+    
         requestAnimationFrame(tick);
       }
       tick();
     })();
-  </script>
+    </script>
