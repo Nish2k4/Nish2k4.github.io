@@ -1,80 +1,125 @@
-body {
-    background-color: #580F41; /* Deep Plum */
-    color: #F5F5F5; /* Light text */
-  }
-  
-  a {
-    color: #D8BFD8; /* Light purple links */
-  }
-  
-  a:hover {
-    color: #E6CCE6; /* Softer purple hover */
-  }
+/* =============================
+   Boho Theme – Nishthha
+   Palette:
+     blush-rose:   #e5af9e
+     terracotta:   #a3573a
+     sand-gold:    #df9152
+     warm-rose:    #eaa198
+     cream:        #fff4f1
+     espresso:     #3b2a28  (for readable text)
+   ============================= */
 
+/* 0) Fonts */
+:root {
+  --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --font-body:    Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  /* Base */
-html, body { background: #580F41; color: #F5F5F5; }
-a { color: #D8BFD8; }
-a:hover, a:focus { color: #E6CCE6; }
+  /* Colors */
+  --boho-cream:      #fff4f1;
+  --boho-blush:      #e5af9e;
+  --boho-rose:       #eaa198;
+  --boho-terra:      #a3573a;
+  --boho-gold:       #df9152;
+  --boho-espresso:   #3b2a28;
 
-/* Header / nav */
-.masthead, .greedy-nav {
-  background: transparent;        /* let plum show through */
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-.greedy-nav a, .masthead__menu-item a {
-  color: #F5F5F5 !important;
-}
-.greedy-nav a:hover, .masthead__menu-item a:hover {
-  color: #E6CCE6 !important;
+  /* Radii & shadows (soft/organic) */
+  --radius: 14px;
+  --shadow: 0 6px 20px rgba(163, 87, 58, 0.12);
 }
 
-/* Buttons */
-.btn, .btn--primary, .btn--inverse {
-  background: #D8BFD8;   /* lavender */
-  color: #3B1430;        /* deep plum text */
-  border: none;
+/* 1) Base */
+html, body {
+  background: var(--boho-cream);
+  color: var(--boho-espresso);
+  font-family: var(--font-body);
 }
-.btn:hover { filter: brightness(1.06); }
-
-/* Cards/sections */
-.page, .page__inner-wrap, .archive, .archive__item, .sidebar {
-  background: rgba(0,0,0,0.08);   /* subtle overlay for readability */
-  backdrop-filter: blur(2px);
+h1,h2,h3,h4 {
+  font-family: var(--font-display);
+  color: var(--boho-espresso);
+  letter-spacing: .2px;
 }
 
-/* Code blocks / callouts readability */
-.highlighter-rouge, pre, code {
-  background: rgba(255,255,255,0.08);
-  color: #FFF;
-}
+/* Links */
+a { color: var(--boho-terra); text-decoration-thickness: .08em; }
+a:hover, a:focus { color: var(--boho-gold); }
 
-/* Footer */
-.page__footer { background: transparent; border-top: 1px solid rgba(255,255,255,0.12); }
-
-
-
-
-/* Below code is to remove the extra beige color in the navigation bar.
-/* Header / nav — remove the beige and use plum */
+/* 2) Header / navigation (remove the old beige) */
 .masthead,
 .masthead__inner-wrap,
-.greedy-nav { 
-  background: #580F41 !important;   /* deep plum */
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+.greedy-nav {
+  background: var(--boho-terra) !important;
+  border-bottom: 1px solid rgba(0,0,0,.05);
 }
-
-/* Top-left site title and the nav links */
 .masthead a,
 .greedy-nav .visible-links > li > a,
 .masthead__menu-item a {
-  background: transparent !important;  /* remove beige tab pills */
-  color: #F5F5F5 !important;
+  color: var(--boho-cream) !important;
+  background: transparent !important;
 }
-
-/* Hover/active states for nav links */
 .greedy-nav .visible-links > li > a:hover,
 .masthead__menu-item a:hover {
-  color: #E6CCE6 !important;             /* lavender */
-  background: rgba(255,255,255,0.10) !important; /* subtle hover */
+  color: var(--boho-gold) !important;
+  background: rgba(255,255,255,.06) !important;
+  border-radius: 8px;
+}
+
+/* 3) Buttons */
+.btn, .btn--primary, .btn--inverse {
+  background: var(--boho-terra);
+  color: var(--boho-cream);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.btn:hover { background: var(--boho-gold); }
+
+/* 4) Cards/sections (soft blocks for readability) */
+.page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout {
+  background: rgba(229, 175, 158, 0.25); /* blush wash */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* 5) Hero (your black box) – keep it but soften the edges */
+.page__hero, .page__hero--overlay {
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* 6) Footer */
+.page__footer {
+  background: var(--boho-terra);
+  color: var(--boho-cream);
+  border-top: 1px solid rgba(0,0,0,.05);
+}
+
+/* 7) Code blocks (if any) */
+.highlighter-rouge, pre, code {
+  background: rgba(0,0,0,0.06);
+  color: var(--boho-espresso);
+  border-radius: 10px;
+}
+
+/* 8) Cute organic dividers (optional – used via class .boho-divider) */
+.boho-divider {
+  height: 10px;
+  background: linear-gradient(90deg,
+    var(--boho-rose),
+    var(--boho-blush),
+    var(--boho-gold),
+    var(--boho-terra));
+  border-radius: 12px;
+  opacity: .4;
+}
+
+/* 9) Skill chips / tags (for Projects/Experiences) */
+.tag, .btn--tag {
+  display: inline-block;
+  padding: .25rem .6rem;
+  margin: .15rem;
+  border-radius: 999px;
+  background: var(--boho-rose);
+  color: var(--boho-espresso);
+  box-shadow: 0 2px 8px rgba(163,87,58,.12);
+  font-weight: 600;
 }
