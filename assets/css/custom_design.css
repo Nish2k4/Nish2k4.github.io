@@ -149,44 +149,28 @@ a:hover, a:focus { color: var(--boho-gold); }
   opacity: .45;
 }
 
-/* ===== To create a paper texture ===== */
+/* ===== To create an animated background ===== */
 
-/* A reusable subtle "paper" made from layered gradients */
-:root {
-  --paper-texture:
-    radial-gradient(rgba(59,42,40,.09) 1px, transparent 1px),
-    radial-gradient(rgba(59,42,40,.05) 1px, transparent 1px),
-    linear-gradient(rgba(255,255,255,.45), rgba(255,255,255,.45));
+/* Boho shimmer background */
+body {
+  background: linear-gradient(
+    120deg,
+    var(--boho-cream) 0%,
+    var(--boho-cream) 40%,
+    rgba(255, 255, 255, 0.4) 50%,
+    var(--boho-blush) 60%,
+    var(--boho-cream) 100%
+  );
+  background-size: 200% 200%;
+  animation: shimmerMove 6s ease-in-out infinite;
 }
 
-/* Put texture on the page background */
-html, body {
-  background-color: var(--boho-cream) !important;
-  background-image: var(--paper-texture) !important;
-  background-size: 22px 22px, 10px 10px, 100% 100% !important;
-  background-position: 0 0, 11px 6px, 0 0 !important;
+/* Soft shimmer animation */
+@keyframes shimmerMove {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
-
-/* Let main containers be translucent so texture peeks through */
-.page,
-.page__inner-wrap,
-.sidebar,
-.archive,
-.notice,
-.callout {
-  background: rgba(255,244,241,0.72) !important; /* creamy, semi-transparent */
-  border: 1px solid rgba(163,87,58,.15);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-/* Provides section headings a soft underline to match the paper vibe */
-.page__inner-wrap h2,
-.page__inner-wrap h3 {
-  box-shadow: inset 0 -2px 0 rgba(163,87,58,.15);
-  display: inline-block;
-  padding-bottom: .15rem;
-}
-
-
-
