@@ -149,13 +149,43 @@ a:hover, a:focus { color: var(--boho-gold); }
   opacity: .45;
 }
 
-/* To create a unique background. */
-body {
-  background-image:
-    radial-gradient(rgba(0,0,0,.015) 1px, transparent 1px),
-    radial-gradient(rgba(0,0,0,.02) 1px, transparent 1px);
-  background-size: 24px 24px, 12px 12px;
-  background-position: 0 0, 12px 6px;
+/* ===== To create a paper texture ===== */
+
+/* A reusable subtle "paper" made from layered gradients */
+:root {
+  --paper-texture:
+    radial-gradient(rgba(59,42,40,.09) 1px, transparent 1px),
+    radial-gradient(rgba(59,42,40,.05) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.45), rgba(255,255,255,.45));
+}
+
+/* Put texture on the page background */
+html, body {
+  background-color: var(--boho-cream) !important;
+  background-image: var(--paper-texture) !important;
+  background-size: 22px 22px, 10px 10px, 100% 100% !important;
+  background-position: 0 0, 11px 6px, 0 0 !important;
+}
+
+/* Let main containers be translucent so texture peeks through */
+.page,
+.page__inner-wrap,
+.sidebar,
+.archive,
+.notice,
+.callout {
+  background: rgba(255,244,241,0.72) !important; /* creamy, semi-transparent */
+  border: 1px solid rgba(163,87,58,.15);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Provides section headings a soft underline to match the paper vibe */
+.page__inner-wrap h2,
+.page__inner-wrap h3 {
+  box-shadow: inset 0 -2px 0 rgba(163,87,58,.15);
+  display: inline-block;
+  padding-bottom: .15rem;
 }
 
 
