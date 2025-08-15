@@ -123,3 +123,28 @@ a:hover, a:focus { color: var(--boho-gold); }
   box-shadow: 0 2px 8px rgba(163,87,58,.12);
   font-weight: 600;
 }
+
+
+/* The below code is for the header area of the portfolio website.
+/* Active nav item + subtle underline */
+.greedy-nav .visible-links > li > a[aria-current="page"] {
+  color: var(--boho-gold) !important;
+  box-shadow: inset 0 -2px 0 var(--boho-gold);
+  border-radius: 0;
+}
+
+/* Make the hero text breathe a bit on mobile */
+@media (max-width: 640px) {
+  .page__hero--overlay h1 { font-size: 2rem; line-height: 1.2; }
+}
+
+/* Center the boho divider & soften it */
+.boho-divider {
+  height: 8px;
+  max-width: 900px;
+  margin: 2rem auto;
+  background: linear-gradient(90deg,
+    var(--boho-rose), var(--boho-blush), var(--boho-gold), var(--boho-terra));
+  border-radius: 999px;
+  opacity: .45;
+}
