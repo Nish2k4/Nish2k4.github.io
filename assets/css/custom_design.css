@@ -136,60 +136,52 @@ a:hover, a:focus { color: var(--boho-gold); }
 }
 
 /* =============================
-   Boho Cloudy Watercolor – animated drift + hue shift
-   Paste at the VERY BOTTOM of custom_design.css
+   Boho Cloudy Watercolor – faster drift + hue shift
    ============================= */
-
-/* Base hues (in degrees). We animate these. */
-:root {
-  --h1: 15;  /* blush-rose */
-  --h2: 30;  /* sand-gold  */
-  --h3: 18;  /* warm-rose  */
-}
-
-/* Register custom properties so they animate smoothly (supported in modern browsers) */
-@property --h1 { syntax: '<number>'; inherits: true; initial-value: 15; }
-@property --h2 { syntax: '<number>'; inherits: true; initial-value: 30; }
-@property --h3 { syntax: '<number>'; inherits: true; initial-value: 18; }
-
-body {
-  /* three watercolor “clouds” over your cream base */
-  background:
-    radial-gradient(circle at 25% 20%, hsla(var(--h1), 65%, 75%, 0.55) 0%, transparent 50%), /* blush */
-    radial-gradient(circle at 75% 25%, hsla(var(--h2), 70%, 60%, 0.45) 0%, transparent 55%),  /* gold  */
-    radial-gradient(circle at 40% 80%, hsla(var(--h3), 60%, 72%, 0.50) 0%, transparent 50%),  /* rose  */
-    var(--boho-cream);
-  background-blend-mode: multiply;
-  background-size: 200% 200%;                 /* enough canvas for drifting */
-  background-attachment: fixed;               /* wallpaper feel */
-  animation:
-    bohoMove 80s ease-in-out infinite alternate,
-    bohoHue 120s linear infinite alternate;   /* slow color breathing */
-  color: var(--boho-espresso);
-}
-
-/* Keep panels translucent so the background shows through */
-.page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout {
-  background: rgba(255, 244, 241, 0.70) !important;
-  border: 1px solid rgba(163,87,58,.12);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-/* Position drift */
-@keyframes bohoMove {
-  0%   { background-position:   0%   0%; }
-  50%  { background-position:  50%  50%; }
-  100% { background-position: 100% 100%; }
-}
-
-/* Gentle hue shift (pink ↔︎ peach ↔︎ gold) */
-@keyframes bohoHue {
-  0%   { --h1: 14; --h2: 28; --h3: 18; }
-  50%  { --h1: 20; --h2: 36; --h3: 24; }
-  100% { --h1: 12; --h2: 30; --h3: 16; }
-}
-
-/* Respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  body { animation: none; }
+   :root {
+    --h1: 15;
+    --h2: 30;
+    --h3: 18;
+  }
+  
+  @property --h1 { syntax: '<number>'; inherits: true; initial-value: 15; }
+  @property --h2 { syntax: '<number>'; inherits: true; initial-value: 30; }
+  @property --h3 { syntax: '<number>'; inherits: true; initial-value: 18; }
+  
+  body {
+    background:
+      radial-gradient(circle at 25% 20%, hsla(var(--h1), 65%, 75%, 0.55) 0%, transparent 50%),
+      radial-gradient(circle at 75% 25%, hsla(var(--h2), 70%, 60%, 0.45) 0%, transparent 55%),
+      radial-gradient(circle at 40% 80%, hsla(var(--h3), 60%, 72%, 0.50) 0%, transparent 50%),
+      var(--boho-cream);
+    background-blend-mode: multiply;
+    background-size: 200% 200%;
+    background-attachment: fixed;
+    animation:
+      bohoMove 20s ease-in-out infinite alternate,
+      bohoHue 40s linear infinite alternate;
+    color: var(--boho-espresso);
+  }
+  
+  .page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout {
+    background: rgba(255, 244, 241, 0.70) !important;
+    border: 1px solid rgba(163,87,58,.12);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  
+  @keyframes bohoMove {
+    0%   { background-position:   0%   0%; }
+    50%  { background-position:  50%  50%; }
+    100% { background-position: 100% 100%; }
+  }
+  
+  @keyframes bohoHue {
+    0%   { --h1: 14; --h2: 28; --h3: 18; }
+    50%  { --h1: 20; --h2: 36; --h3: 24; }
+    100% { --h1: 12; --h2: 30; --h3: 16; }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    body { animation: none; }
+  }
