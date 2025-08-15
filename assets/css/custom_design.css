@@ -73,9 +73,10 @@ a:hover, a:focus { color: var(--boho-gold); }
 }
 .btn:hover { background: var(--boho-gold); }
 
-/* 4) Cards/sections (soft blocks for readability) */
+/* Let the shimmer be visible under content areas */
 .page, .page__inner-wrap, .archive, .archive__item, .sidebar, .notice, .callout {
-  background: rgba(229, 175, 158, 0.25); /* blush wash */
+  background: rgba(255, 244, 241, 0.55) !important; /* creamy + translucent */
+  border: 1px solid rgba(163,87,58,.12);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
@@ -160,17 +161,12 @@ body {
     rgba(255, 255, 255, 0.4) 50%,
     var(--boho-blush) 60%,
     var(--boho-cream) 100%
-  );
-  background-size: 200% 200%;
+  ) !important;
+  background-size: 200% 200% !important;
   animation: shimmerMove 6s ease-in-out infinite;
 }
 
-/* Soft shimmer animation */
 @keyframes shimmerMove {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
