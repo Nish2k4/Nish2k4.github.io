@@ -15,7 +15,9 @@ Hi! I'm **Nishthha**, a third-year **CS (People & Media) @ Georgia Tech**, focus
 ## Photography (mini–gallery)
 
 <div class="mini-gallery">
-  <img src="{{ '/assets/images/photo_ansley_park_clock.jpg'     | relative_url }}" alt="Ansley clock at blue hour">
-  <img src="{{ '/assets/images/photo_rose_phone_booth.jpg'      | relative_url }}" alt="Vintage phone on red floral wall">
-  <img src="{{ '/assets/images/photo_georgia_tech_beauty.jpg'   | relative_url }}" alt="Intricate new structure at Georgia Tech">
+
+![]({{ '/assets/images/photo_ansley_park_clock.jpg'   | relative_url }})  
+![]({{ '/assets/images/photo_rose_phone_booth.jpg'    | relative_url }})  
+![]({{ '/assets/images/photo_georgia_tech_beauty.jpg' | relative_url }})
+
 </div>
