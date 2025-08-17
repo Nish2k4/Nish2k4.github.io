@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nishthha Pandya — Portfolio</title>
+  <meta name="description" content="Portfolio of Nishthha Pandya — projects, experience, and contact information." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0d13;           /* velvety black plum */
+      --bg-2: #1a1622;         /* deeper panel */
+      --text: #f2e9f7;         /* soft porcelain */
+      --muted: #bba9cf;        /* lavender mist */
+      --accent: #d47fd4;       /* orchid */
+      --accent-2: #8aa7f6;     /* periwinkle */
+      --card: rgba(255,255,255,0.06);
+      --card-border: rgba(255,255,255,0.14);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --maxw: 1100px;
+      --header-h: 72px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--text); background: radial-gradient(1200px 1200px at 10% -10%, rgba(212,127,212,.25), transparent 60%),
+                   radial-gradient(1000px 800px at 110% 10%, rgba(138,167,246,.18), transparent 55%),
+                   linear-gradient(180deg, #120f16 0%, #0f0d13 60%);
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+      line-height: 1.6;
+    }
+
+    /* ===== Header / Nav ===== */
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px);
+      background: linear-gradient(180deg, rgba(20,16,26,.85), rgba(20,16,26,.65));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav {
+      height: var(--header-h); display: flex; align-items: center; justify-content: space-between;
+      max-width: var(--maxw); margin: 0 auto; padding: 0 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: .4px; }
+    .logo {
+      width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 6px 20px rgba(212,127,212,.35);
+    }
+    nav a { color: var(--text); text-decoration: none; opacity: .85; padding: 10px 14px; border-radius: 12px; font-weight: 500; }
+    nav a:hover, nav a[aria-current="true"] { background: rgba(255,255,255,.08); opacity: 1; }
+
+    .menu { display: flex; align-items: center; gap: 2px; }
+    .burger { display: none; background: none; border: 1px solid rgba(255,255,255,.18); color: var(--text); padding: 10px 12px; border-radius: 12px; }
+
+    /* ===== Sections ===== */
+    section { padding: 88px 20px; scroll-margin-top: calc(var(--header-h) + 16px); }
+    .wrap { max-width: var(--maxw); margin: 0 auto; }
+
+    .kicker { color: var(--muted); text-transform: uppercase; letter-spacing: .22em; font-size: 12px; font-weight: 600; }
+    h1, h2, h3 { margin: .3em 0 .6em; line-height: 1.2; }
+    h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 700; }
+    h2 { font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; }
+    p { color: #e9def2; opacity: .95; }
+
+    .hero {
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: center;
+    }
+    .hero .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+      border: 1px solid var(--card-border); border-radius: calc(var(--radius) + 6px); padding: 26px; box-shadow: var(--shadow);
+    }
+    .hero .tagline { font-family: 'Crimson Pro', serif; font-size: clamp(18px, 2vw, 22px); color: var(--muted); }
+
+    .cta { display: flex; gap: 12px; margin-top: 18px; }
+    .btn { border: 1px solid transparent; padding: 12px 18px; border-radius: 14px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0e0b11; box-shadow: 0 10px 20px rgba(212,127,212,.25); }
+    .btn.ghost { border-color: rgba(255,255,255,.22); color: var(--text); background: rgba(255,255,255,.03); }
+    .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+    /* About */
+    .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; }
+    .panel { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .chip { padding: 8px 12px; border-radius: 999px; background: rgba(212,127,212,.12); border: 1px solid rgba(212,127,212,.35); color: #f7e9ff; font-size: 13px; }
+
+    /* Projects */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin-top: 6px; }
+    .badge { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(138,167,246,.14); border: 1px solid rgba(138,167,246,.35); color: #e6edff; }
+    .card .meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+    /* Experiences (timeline) */
+    .timeline { position: relative; margin-left: 6px; }
+    .timeline::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, rgba(212,127,212,.6), rgba(138,167,246,.6)); }
+    .tl-item { position: relative; padding-left: 42px; margin: 16px 0; }
+    .tl-bullet { position: absolute; left: 4px; top: 8px; width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 6px 14px rgba(212,127,212,.35); border: 2px solid #201928; }
+    .tl-item .when { font-size: 12px; color: var(--muted); }
+
+    /* Contact */
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    form .full { grid-column: 1 / -1; }
+    label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 6px; }
+    input, textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--text); }
+    textarea { min-height: 140px; resize: vertical; }
+
+    /* Footer */
+    footer { padding: 36px 20px 60px; text-align: center; color: var(--muted); }
+
+    /* Utilities */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .menu { display: none; position: absolute; top: calc(var(--header-h) + 8px); right: 16px; flex-direction: column; background: rgba(18,15,22,.95); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 8px; }
+      .menu.open { display: flex; }
+      .burger { display: inline-flex; }
+    }
+    @media (max-width: 620px) {
+      .grid { grid-template-columns: 1fr; }
+      form { grid-template-columns: 1fr; }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Nishthha Pandya</span>
+      </div>
+      <nav aria-label="Primary">
+        <button class="burger" aria-expanded="false" aria-controls="menu">☰</button>
+        <div id="menu" class="menu">
+          <a href="#home">Home</a>
+          <a href="#about">About Me</a>
+          <a href="#projects">Projects</a>
+          <a href="#experiences">Experiences</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Home ===== -->
+  <section id="home" aria-labelledby="home-title">
+    <div class="wrap hero">
+      <div>
+        <span class="kicker">Hello, I'm</span>
+        <h1 id="home-title">Nishthha Pandya</h1>
+        <p class="tagline">Third-year CS @ Georgia Tech — building useful & delightful experiences.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See Projects</a>
+          <a class="btn ghost" href="#contact">Get in Touch</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Quick Highlights</h3>
+        <ul>
+          <li>Focus areas: UI/UX · Frontend · Research · Data Viz</li>
+          <li>Tools: Figma, React, TypeScript, Python</li>
+          <li>Looking for: Summer 2026 internships</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div class="panel">
+        <span class="kicker">About</span>
+        <h2 id="about-title">A little about me</h2>
+        <p>Write a short bio here: </p>
+        <div class="chips">
+          <span class="chip">Human-centered ✦</span>
+          <span class="chip">System thinker ✦</span>
+          <span class="chip">Curious ✦</span>
+          <span class="chip">Collaborative ✦</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0">Skills Snapshot</h3>
+        <p class="meta">Need to update these.</p>
+        <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 12px;">
+          <div class="card"><strong>Design</strong><br>Wireframing, Prototyping, Usability</div>
+          <div class="card"><strong>Frontend</strong><br>HTML, CSS, JS/TS, React</div>
+          <div class="card"><strong>Data</strong><br>Python, Pandas, Visualization</div>
+          <div class="card"><strong>Tools</strong><br>Figma, Git/GitHub, VS Code</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="wrap">
+      <span class="kicker">Work</span>
+      <h2 id="projects-title">Selected Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="badge">UI/UX</span>
+          <h3>Project One Title</h3>
+          <p>Project One Info.</p>
+          <p class="meta">Role: Designer · Tools: Figma, Maze · 2025</p>
+        </article>
+        <article class="card">
+          <span class="badge">Web</span>
+          <h3>Project Two Title</h3>
+          <p>Project Two Info.</p>
+          <p class="meta">Role: Frontend · Stack: React, TS · 2025</p>
+        </article>
+        <article class="card">
+          <span class="badge">Data Viz</span>
+          <h3>Project Three Title</h3>
+          <p>Project Three Info.</p>
+          <p class="meta">Role: Dev/Analyst · Stack: Python, D3 · 2024</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Experiences ===== -->
+  <section id="experiences" aria-labelledby="exp-title">
+    <div class="wrap">
+      <span class="kicker">Experience</span>
+      <h2 id="exp-title">Experiences</h2>
+      <div class="timeline">
+        <div class="tl-item card">
+          <span class="tl-bullet" aria-hidden="true"></span>
+          <div class="when">2025 — Present</div>
+          <h3>Role · Company</h3>
+          <p>Experience 1 Info.</p>
+        </div>
+        <div class="tl-item card">
+          <span class="tl-bullet" aria-hidden="true"></span>
+          <div class="when">2024 — 2025</div>
+          <h3>Role · Organization</h3>
+          <p>Experience 2 Info.</p>
+        </div>
+        <div class="tl-item card">
+          <span class="tl-bullet" aria-hidden="true"></span>
+          <div class="when">2023 — 2024</div>
+          <h3>Leadership · Club</h3>
+          <p>Experience 3 Info.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <span class="kicker">Contact</span>
+      <h2 id="contact-title">Let’s talk</h2>
+      <p>Have a question or opportunity? Send a message below or email <a href="mailto:npandya31@gatech.edu" style="color:var(--accent-2);">npandya31@gatech.edu</a>.</p>
+      <form action="mailto:npandya31@gatech.edu" method="post" enctype="text/plain">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" autocomplete="name" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="full">
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" required />
+        </div>
+        <div class="full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <div class="full" style="display:flex; gap:10px;">
+          <button class="btn primary" type="submit">Send</button>
+          <a class="btn ghost" href="#home">Back to top</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Nishthha Pandya · Built with GitHub Pages
+    </div>
+  </footer>
+
+  <script>
+    // Update copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const burger = document.querySelector('.burger');
+    const menu = document.getElementById('menu');
+    burger.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Close menu when clicking a link (mobile)
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    // Scrollspy: highlight current section in nav
+    const sections = [...document.querySelectorAll('section')];
+    const links = [...menu.querySelectorAll('a')];
+    const byId = id => links.find(a => a.getAttribute('href') === '#' + id);
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const link = byId(entry.target.id);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          links.forEach(l => l.removeAttribute('aria-current'));
+          link.setAttribute('aria-current','true');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
+
+    sections.forEach(sec => io.observe(sec));
+  </script>
+</body>
+</html>
