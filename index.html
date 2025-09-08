@@ -170,8 +170,8 @@
       <div class="card">
         <h3 style="margin-top:0">Quick Highlights</h3>
         <ul>
-          <li>Focus areas: UI/UX · Frontend · Research · Data Viz</li>
-          <li>Tools: Figma, React, TypeScript, Python</li>
+          <li>Focus areas: UI/UX Design · Human-Centered Computing · Mobile & Web Development · Data Analysis</li>
+          <li>Tools: Java, Python, Android Studio, Adobe Illustrator</li>
           <li>Looking for: Summer 2026 internships</li>
         </ul>
       </div>
@@ -184,22 +184,26 @@
       <div class="panel">
         <span class="kicker">About</span>
         <h2 id="about-title">A little about me</h2>
-        <p>Write a short bio here: </p>
+        <p>I'm a third-year Computer Science student at Georgia Tech (GPA 4.0) with a passion for designing and building technology that blends usability with impact. Alongside my focus on UI/UX design, mobile & web development, and data-driven insights, I've pursued extensive coursework in psychology — including Cognitive Science, Human Language Processing, and Social Psychology — to better understand how people think, communicate, and interact with technology. </p>
+
+        <p> Beyond academics, I've served as President of Women in Technology at Georgia State University, contributed creative work at VOX ATL, and now collaborate on Georgia Tech's VIP: Industry Innovation - Circular Economy, helping design sustainable systems such as a bio-plastic bottling plant and its virtual twin for The Bahamas. </p>
+            
+        <p> I thrive in collaborative, cross-disciplinary environments where people, design, technology, and sustainability intersect — and I'm currently seeking Summer 2026 internships to keep growing at that intersection. </p>
         <div class="chips">
-          <span class="chip">Human-centered ✦</span>
-          <span class="chip">System thinker ✦</span>
-          <span class="chip">Curious ✦</span>
-          <span class="chip">Collaborative ✦</span>
+          <span class="chip">Human-Centered Design ✦</span>
+          <span class="chip">UI/UX & HCI ✦</span>
+          <span class="chip">Psychology-Informed ✦</span>
+          <span class="chip">Sustainability Focused ✦</span>
+          <span class="chip">Collaborative Leader ✦</span>
         </div>
       </div>
       <div class="panel">
         <h3 style="margin-top:0">Skills Snapshot</h3>
-        <p class="meta">Need to update these.</p>
         <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 12px;">
-          <div class="card"><strong>Design</strong><br>Wireframing, Prototyping, Usability</div>
-          <div class="card"><strong>Frontend</strong><br>HTML, CSS, JS/TS, React</div>
-          <div class="card"><strong>Data</strong><br>Python, Pandas, Visualization</div>
-          <div class="card"><strong>Tools</strong><br>Figma, Git/GitHub, VS Code</div>
+          <div class="card"><strong>Design</strong><br>UI/UX, Wireframing, Usability Testing</div>
+          <div class="card"><strong>Development</strong><br>Java, Python, HTML/CSS, Flutter, Android Studio</div>
+          <div class="card"><strong>Data</strong><br>Pandas, Data Analysis, Visualization</div>
+          <div class="card"><strong>Tools</strong><br>Adobe Illustrator, Git/GitHub, Microsoft Office</div>
         </div>
       </div>
     </div>
@@ -212,26 +216,93 @@
       <h2 id="projects-title">Selected Projects</h2>
       <div class="grid">
         <article class="card">
-          <span class="badge">UI/UX</span>
-          <h3>Project One Title</h3>
-          <p>Project One Info.</p>
-          <p class="meta">Role: Designer · Tools: Figma, Maze · 2025</p>
+          <span class="badge">Film</span>
+          <h3>Silverfall Studios – The Last Bloom</h3>
+          <p>Founded a YouTube channel exploring the beauty, mystery, and emotion of our universe through cinematic short films. Produced <em>The Last Bloom</em>, an environmental short told solely through visuals and music, capturing the fragile beauty of our planet and the silent warning signs of its decline.</p>
+          <p class="meta">Role: Creator · Tools: Final Cut Pro</p>
+          <button class="btn watch-btn" data-video="74PGz76HF84">🎬 Watch Film</button>
+          <div class="video-container" style="display: none;"></div>
         </article>
         <article class="card">
-          <span class="badge">Web</span>
-          <h3>Project Two Title</h3>
-          <p>Project Two Info.</p>
-          <p class="meta">Role: Frontend · Stack: React, TS · 2025</p>
+          <span class="badge">Mobile</span>
+          <h3>The Official College Scheduler</h3>
+          <p>Collaborated in a team of three to design and develop a comprehensive college scheduling app. Built a dynamic to-do list feature in addition to core scheduling functions, while working in an Agile environment to meet milestones.</p>
+          <p class="meta">Role: Android Developer · Stack: Java, XML, Android Studio</p>
         </article>
         <article class="card">
-          <span class="badge">Data Viz</span>
-          <h3>Project Three Title</h3>
-          <p>Project Three Info.</p>
-          <p class="meta">Role: Dev/Analyst · Stack: Python, D3 · 2024</p>
+          <span class="badge">Mobile</span>
+          <h3>CollegeFit</h3>
+          <p>Conceptualized and developed a mobile app to enhance the college selection process. Designed the UI/UX, implemented personalized recommendation features, and streamlined the search experience through an end-to-end development cycle.</p>
+          <p class="meta">Role: Designer & Developer · Stack: Flutter, Android Studio</p>
         </article>
       </div>
     </div>
   </section>
+
+  <!-- ===== JavaScript to Toggle Video ===== -->
+  <script>
+    function extractYouTubeId(input) {
+      // Accepts raw ID or any common YouTube URL
+      // Examples it handles:
+      //  - 74PGz76HF84
+      //  - https://www.youtube.com/watch?v=74PGz76HF84&t=1s
+      //  - https://youtu.be/74PGz76HF84?si=...
+      //  - https://www.youtube.com/embed/74PGz76HF84?start=30
+      const idPattern = /(?:v=|\/embed\/|youtu\.be\/)([A-Za-z0-9_-]{11})/;
+      if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
+      const match = input.match(idPattern);
+      return match ? match[1] : input; // fallback: return as-is
+    }
+  
+    document.querySelectorAll('.watch-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const container = button.nextElementSibling;
+        if (container.style.display === 'none') {
+          const raw = button.dataset.video.trim();
+          const id = extractYouTubeId(raw);
+          const src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`;
+  
+          container.style.display = 'block';
+          container.innerHTML = `
+            <iframe width="100%" height="315"
+              src="${src}"
+              title="The Last Bloom - Silverfall Studios"
+              frameborder="0"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>`;
+          button.textContent = "✖ Close Film";
+          button.setAttribute('aria-expanded', 'true');
+        } else {
+          container.style.display = 'none';
+          container.innerHTML = "";
+          button.textContent = "🎬 Watch Film";
+          button.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  </script>
+
+<!-- ===== Responsive Video CSS ===== -->
+<style>
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-top: 1rem;
+  }
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
 
   <!-- ===== Experiences ===== -->
   <section id="experiences" aria-labelledby="exp-title">
@@ -241,21 +312,21 @@
       <div class="timeline">
         <div class="tl-item card">
           <span class="tl-bullet" aria-hidden="true"></span>
-          <div class="when">2025 — Present</div>
-          <h3>Role · Company</h3>
-          <p>Experience 1 Info.</p>
+          <div class="when">Aug 2025 — Present</div>
+          <h3>VIP Junior Design · Georgia Institute of Technology</h3>
+          <p>Contributing to a full-stack Transaction-Business-Platform in Next.js with a NoSQL backend. This VIP supports business engagement in low-digital-access communities and explores sustainable industry innovation within a circular-economy framework.</p>
         </div>
         <div class="tl-item card">
           <span class="tl-bullet" aria-hidden="true"></span>
-          <div class="when">2024 — 2025</div>
-          <h3>Role · Organization</h3>
-          <p>Experience 2 Info.</p>
+          <div class="when">Jan 2023 — Dec 2023</div>
+          <h3>President · Women in Technology (WIT) at Georgia State University</h3>
+          <p>Revitalized the local chapter, introduced Python workshops (Pandas & JupyterLite), and secured the largest club budget on campus through collaboration with administrators.</p>
         </div>
         <div class="tl-item card">
           <span class="tl-bullet" aria-hidden="true"></span>
-          <div class="when">2023 — 2024</div>
-          <h3>Leadership · Club</h3>
-          <p>Experience 3 Info.</p>
+          <div class="when">Jun 2020 — May 2022</div>
+          <h3>Teen Staff Member · VOX ATL</h3>
+          <p>Authored articles, poems, and cartoons, produced multimedia content, and contributed to youth-led podcasts on community issues.</p>
         </div>
       </div>
     </div>
